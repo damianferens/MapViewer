@@ -7,23 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		914738ADCCAE8A4EE2D7D553 /* libPods-MapViewer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1205E2D64881916D4428F60E /* libPods-MapViewer.a */; };
 		E09134311E7945F400D3BBFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09134301E7945F400D3BBFD /* AppDelegate.swift */; };
-		E09134331E7945F400D3BBFD /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09134321E7945F400D3BBFD /* FirstViewController.swift */; };
-		E09134351E7945F400D3BBFD /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09134341E7945F400D3BBFD /* SecondViewController.swift */; };
 		E09134381E7945F400D3BBFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E09134361E7945F400D3BBFD /* Main.storyboard */; };
 		E091343A1E7945F400D3BBFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E09134391E7945F400D3BBFD /* Assets.xcassets */; };
 		E091343D1E7945F400D3BBFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E091343B1E7945F400D3BBFD /* LaunchScreen.storyboard */; };
+		E09134471E79494500D3BBFD /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E09134461E79494500D3BBFD /* Podfile */; };
+		E091344B1E79602A00D3BBFD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E091344A1E79602A00D3BBFD /* CoreLocation.framework */; };
+		E091344D1E79658200D3BBFD /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E091344C1E79658200D3BBFD /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1205E2D64881916D4428F60E /* libPods-MapViewer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MapViewer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		368D702065FD1BF272BC6BD0 /* Pods-MapViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapViewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-MapViewer/Pods-MapViewer.release.xcconfig"; sourceTree = "<group>"; };
 		E091342D1E7945F400D3BBFD /* MapViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E09134301E7945F400D3BBFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E09134321E7945F400D3BBFD /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		E09134341E7945F400D3BBFD /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		E09134371E7945F400D3BBFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E09134391E7945F400D3BBFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E091343C1E7945F400D3BBFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E091343E1E7945F400D3BBFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E09134461E79494500D3BBFD /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E091344A1E79602A00D3BBFD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E091344C1E79658200D3BBFD /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		F4F0BC6194AB091076677077 /* Pods-MapViewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapViewer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MapViewer/Pods-MapViewer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +37,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E091344B1E79602A00D3BBFD /* CoreLocation.framework in Frameworks */,
+				914738ADCCAE8A4EE2D7D553 /* libPods-MapViewer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BB82E32C5FFC5A36B2BF3C59 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F4F0BC6194AB091076677077 /* Pods-MapViewer.debug.xcconfig */,
+				368D702065FD1BF272BC6BD0 /* Pods-MapViewer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E09134241E7945F400D3BBFD = {
 			isa = PBXGroup;
 			children = (
+				E09134461E79494500D3BBFD /* Podfile */,
 				E091342F1E7945F400D3BBFD /* MapViewer */,
 				E091342E1E7945F400D3BBFD /* Products */,
+				BB82E32C5FFC5A36B2BF3C59 /* Pods */,
+				FC57D80880C74076ED66E6FA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,14 +77,22 @@
 			isa = PBXGroup;
 			children = (
 				E09134301E7945F400D3BBFD /* AppDelegate.swift */,
-				E09134321E7945F400D3BBFD /* FirstViewController.swift */,
-				E09134341E7945F400D3BBFD /* SecondViewController.swift */,
 				E09134361E7945F400D3BBFD /* Main.storyboard */,
 				E09134391E7945F400D3BBFD /* Assets.xcassets */,
 				E091343B1E7945F400D3BBFD /* LaunchScreen.storyboard */,
 				E091343E1E7945F400D3BBFD /* Info.plist */,
+				E091344C1E79658200D3BBFD /* MapViewController.swift */,
 			);
 			path = MapViewer;
+			sourceTree = "<group>";
+		};
+		FC57D80880C74076ED66E6FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E091344A1E79602A00D3BBFD /* CoreLocation.framework */,
+				1205E2D64881916D4428F60E /* libPods-MapViewer.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +102,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E09134411E7945F400D3BBFD /* Build configuration list for PBXNativeTarget "MapViewer" */;
 			buildPhases = (
+				DAFB302869E82EDA1C9F9F15 /* [CP] Check Pods Manifest.lock */,
 				E09134291E7945F400D3BBFD /* Sources */,
 				E091342A1E7945F400D3BBFD /* Frameworks */,
 				E091342B1E7945F400D3BBFD /* Resources */,
+				17910A5B060D60DC4B39916D /* [CP] Embed Pods Frameworks */,
+				6795DD583254CB5257F953EB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,20 +160,68 @@
 			files = (
 				E091343D1E7945F400D3BBFD /* LaunchScreen.storyboard in Resources */,
 				E091343A1E7945F400D3BBFD /* Assets.xcassets in Resources */,
+				E09134471E79494500D3BBFD /* Podfile in Resources */,
 				E09134381E7945F400D3BBFD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		17910A5B060D60DC4B39916D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MapViewer/Pods-MapViewer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6795DD583254CB5257F953EB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MapViewer/Pods-MapViewer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DAFB302869E82EDA1C9F9F15 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E09134291E7945F400D3BBFD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E09134351E7945F400D3BBFD /* SecondViewController.swift in Sources */,
 				E09134311E7945F400D3BBFD /* AppDelegate.swift in Sources */,
-				E09134331E7945F400D3BBFD /* FirstViewController.swift in Sources */,
+				E091344D1E79658200D3BBFD /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +342,7 @@
 		};
 		E09134421E7945F400D3BBFD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4F0BC6194AB091076677077 /* Pods-MapViewer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = R6WRAS7NH9;
@@ -276,6 +356,7 @@
 		};
 		E09134431E7945F400D3BBFD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 368D702065FD1BF272BC6BD0 /* Pods-MapViewer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = R6WRAS7NH9;
@@ -306,6 +387,7 @@
 				E09134431E7945F400D3BBFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
