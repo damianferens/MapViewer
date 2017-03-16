@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Ostatnie-->
         <scene sceneID="cxT-pf-ANu">
             <objects>
                 <viewController id="KAL-an-Wh8" sceneMemberID="viewController">
@@ -44,7 +44,7 @@
                             <constraint firstItem="3RP-C0-IXh" firstAttribute="leading" secondItem="gmg-9p-qaz" secondAttribute="leading" id="ahm-5D-J6y"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="dmj-a4-9QZ"/>
+                    <tabBarItem key="tabBarItem" title="Ostatnie" id="dmj-a4-9QZ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZUA-1N-qqx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -61,13 +61,28 @@
                     <view key="view" contentMode="scaleToFill" id="QRQ-wt-mYj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qRU-Ib-Erc" customClass="GMSMapView">
+                                <rect key="frame" x="37" y="197" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qRU-Ib-Erc" firstAttribute="leading" secondItem="QRQ-wt-mYj" secondAttribute="leading" id="7Hq-s2-myr"/>
+                            <constraint firstAttribute="trailing" secondItem="qRU-Ib-Erc" secondAttribute="trailing" id="VqQ-q8-SkJ"/>
+                            <constraint firstItem="qRU-Ib-Erc" firstAttribute="top" secondItem="Mo1-sg-g8p" secondAttribute="bottom" id="o0d-ay-9Ui"/>
+                            <constraint firstItem="Kau-5G-iZb" firstAttribute="top" secondItem="qRU-Ib-Erc" secondAttribute="bottom" id="pVH-QA-g68"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="Bm9-FF-5zW"/>
+                    <tabBarItem key="tabBarItem" title="Mapa" id="Bm9-FF-5zW"/>
+                    <connections>
+                        <outlet property="mapView" destination="qRU-Ib-Erc" id="ziZ-Oi-lCZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4D8-xe-Mzn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1058" y="-695"/>
+            <point key="canvasLocation" x="1056.8" y="-695.80209895052474"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="uqA-fj-iZi">

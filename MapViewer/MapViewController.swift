@@ -8,41 +8,41 @@
 
 import UIKit
 import GoogleMaps
+import Alamofire
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, CLLocationManagerDelegate {
+    lazy var locationManager = CLLocationManager()
+    @IBOutlet weak var mapView: GMSMapView!
+    let connectionManager = ConnectionManager()
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation = locations.last
+        showPlacesForCoordinates(coordinates: CLLocationCoordinate2D(latitude: userLocation!.coordinate.latitude, longitude: userLocation!.coordinate.longitude))
+        
+        let camera = GMSCameraPosition.camera(withLatitude: userLocation!.coordinate.latitude,
+                                              longitude: userLocation!.coordinate.longitude, zoom: 13.0)
+        mapView.camera = camera
+        locationManager.stopUpdatingLocation()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        GMSServices.provideAPIKey("AIzaSyA9lxg88Ib46SBS9XnPdPXZdgZlXJ1y8qo")
         
-        let latitude = 50.070211
-        let longitude = 19.932971
-        let camera = GMSCameraPosition.camera(withLatitude: latitude , longitude: longitude, zoom: 12)
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
-        view = mapView
-        
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        marker.title = "House"
-        marker.map = mapView
-        
-        // Do any additional setup after loading the view.
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+        mapView.isMyLocationEnabled = true
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    private func showPlacesForCoordinates(coordinates :CLLocationCoordinate2D) {
+        connectionManager.placesForCoordinates(coordinates: coordinates) { [weak self] (places: [Place]) in
+            for place in places {
+                let marker = GMSMarker()
+                marker.position = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+                marker.title = place.name
+                marker.map = self!.mapView
+            }
+        }
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
