@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 
-class MapViewController: UIViewController, CLLocationManagerDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     lazy var locationManager = CLLocationManager()
     @IBOutlet weak var mapView: GMSMapView!
     let connectionManager = ConnectionManager()
@@ -19,14 +19,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let camera = GMSCameraPosition.camera(withLatitude: userLocation!.coordinate.latitude,
                                               longitude: userLocation!.coordinate.longitude, zoom: 13.0)
         showPlacesForCoordinates(coordinates: CLLocationCoordinate2D(latitude: userLocation!.coordinate.latitude, longitude: userLocation!.coordinate.longitude))
-
+        
         mapView.camera = camera
         locationManager.stopUpdatingLocation()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        mapView.delegate = self
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -34,7 +34,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         mapView.isMyLocationEnabled = true
     }
     
-    private func showPlacesForCoordinates(coordinates :CLLocationCoordinate2D) {
+    private func showPlacesForCoordinates(coordinates: CLLocationCoordinate2D) {
         connectionManager.placesForCoordinates(coordinates: coordinates) { [weak self] (places: [Place]) in
             let path = GMSMutablePath()
             
@@ -52,5 +52,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     private func animateToBounds(bounds :GMSCoordinateBounds) {
         self.mapView!.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 50.0))
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "placeDetailsVC") as! PlaceDetailsViewController
+        self.present(vc, animated: true, completion: nil)
     }
 }

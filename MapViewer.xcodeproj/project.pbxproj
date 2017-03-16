@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		AF74CDAD76B3711B660DF36C /* Pods_MapViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFF40373D8FC2F892911ACF /* Pods_MapViewer.framework */; };
 		E078C2421E7B0C380016926D /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078C2411E7B0C380016926D /* ConnectionManager.swift */; };
+		E078C2471E7B3A800016926D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E078C2461E7B3A800016926D /* CoreData.framework */; };
+		E078C26F1E7B4AE00016926D /* PlaceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078C26E1E7B4AE00016926D /* PlaceDetailsViewController.swift */; };
 		E09134311E7945F400D3BBFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09134301E7945F400D3BBFD /* AppDelegate.swift */; };
 		E09134381E7945F400D3BBFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E09134361E7945F400D3BBFD /* Main.storyboard */; };
 		E091343A1E7945F400D3BBFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E09134391E7945F400D3BBFD /* Assets.xcassets */; };
@@ -23,6 +25,8 @@
 		368D702065FD1BF272BC6BD0 /* Pods-MapViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapViewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-MapViewer/Pods-MapViewer.release.xcconfig"; sourceTree = "<group>"; };
 		BDFF40373D8FC2F892911ACF /* Pods_MapViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E078C2411E7B0C380016926D /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
+		E078C2461E7B3A800016926D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		E078C26E1E7B4AE00016926D /* PlaceDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceDetailsViewController.swift; sourceTree = "<group>"; };
 		E091342D1E7945F400D3BBFD /* MapViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MapViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E09134301E7945F400D3BBFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E09134371E7945F400D3BBFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -41,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E078C2471E7B3A800016926D /* CoreData.framework in Frameworks */,
 				E091344B1E79602A00D3BBFD /* CoreLocation.framework in Frameworks */,
 				AF74CDAD76B3711B660DF36C /* Pods_MapViewer.framework in Frameworks */,
 			);
@@ -69,6 +74,7 @@
 		E078C2441E7B32220016926D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E078C26E1E7B4AE00016926D /* PlaceDetailsViewController.swift */,
 				E091344C1E79658200D3BBFD /* MapViewController.swift */,
 			);
 			name = ViewControllers;
@@ -119,6 +125,7 @@
 		FC57D80880C74076ED66E6FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E078C2461E7B3A800016926D /* CoreData.framework */,
 				E091344A1E79602A00D3BBFD /* CoreLocation.framework */,
 				BDFF40373D8FC2F892911ACF /* Pods_MapViewer.framework */,
 			);
@@ -251,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E091344F1E7A95BC00D3BBFD /* Place.swift in Sources */,
+				E078C26F1E7B4AE00016926D /* PlaceDetailsViewController.swift in Sources */,
 				E078C2421E7B0C380016926D /* ConnectionManager.swift in Sources */,
 				E09134311E7945F400D3BBFD /* AppDelegate.swift in Sources */,
 				E091344D1E79658200D3BBFD /* MapViewController.swift in Sources */,
