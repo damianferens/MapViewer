@@ -58,6 +58,30 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E078C2431E7B321A0016926D /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				E078C2411E7B0C380016926D /* ConnectionManager.swift */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		E078C2441E7B32220016926D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E091344C1E79658200D3BBFD /* MapViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E078C2451E7B32330016926D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E091344E1E7A95BC00D3BBFD /* Place.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		E09134241E7945F400D3BBFD = {
 			isa = PBXGroup;
 			children = (
@@ -80,14 +104,14 @@
 		E091342F1E7945F400D3BBFD /* MapViewer */ = {
 			isa = PBXGroup;
 			children = (
+				E078C2451E7B32330016926D /* Model */,
+				E078C2441E7B32220016926D /* ViewControllers */,
+				E078C2431E7B321A0016926D /* Managers */,
 				E09134301E7945F400D3BBFD /* AppDelegate.swift */,
-				E091344E1E7A95BC00D3BBFD /* Place.swift */,
-				E091344C1E79658200D3BBFD /* MapViewController.swift */,
 				E09134361E7945F400D3BBFD /* Main.storyboard */,
 				E09134391E7945F400D3BBFD /* Assets.xcassets */,
 				E091343B1E7945F400D3BBFD /* LaunchScreen.storyboard */,
 				E091343E1E7945F400D3BBFD /* Info.plist */,
-				E078C2411E7B0C380016926D /* ConnectionManager.swift */,
 			);
 			path = MapViewer;
 			sourceTree = "<group>";

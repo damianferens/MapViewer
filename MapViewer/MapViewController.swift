@@ -8,7 +8,6 @@
 
 import UIKit
 import GoogleMaps
-import Alamofire
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     lazy var locationManager = CLLocationManager()
@@ -17,10 +16,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation = locations.last
-        showPlacesForCoordinates(coordinates: CLLocationCoordinate2D(latitude: userLocation!.coordinate.latitude, longitude: userLocation!.coordinate.longitude))
-        
         let camera = GMSCameraPosition.camera(withLatitude: userLocation!.coordinate.latitude,
                                               longitude: userLocation!.coordinate.longitude, zoom: 13.0)
+        showPlacesForCoordinates(coordinates: CLLocationCoordinate2D(latitude: userLocation!.coordinate.latitude, longitude: userLocation!.coordinate.longitude))
+
         mapView.camera = camera
         locationManager.stopUpdatingLocation()
     }
@@ -37,12 +36,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     private func showPlacesForCoordinates(coordinates :CLLocationCoordinate2D) {
         connectionManager.placesForCoordinates(coordinates: coordinates) { [weak self] (places: [Place]) in
+            let path = GMSMutablePath()
+            
             for place in places {
                 let marker = GMSMarker()
-                marker.position = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+                let coordinates = CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude)
+                marker.position = coordinates
                 marker.title = place.name
                 marker.map = self!.mapView
+                path.add(coordinates)
             }
+            self!.animateToBounds(bounds: GMSCoordinateBounds(path: path))
         }
+    }
+    
+    private func animateToBounds(bounds :GMSCoordinateBounds) {
+        self.mapView!.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 50.0))
     }
 }
