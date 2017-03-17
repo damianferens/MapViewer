@@ -12,6 +12,8 @@ class PlaceDetailsViewController: UIViewController {
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var placeName: UILabel!
     
+    @IBOutlet weak var longitudeLabel: UILabel!
+    @IBOutlet weak var latitudeLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         loadContent()
@@ -22,13 +24,16 @@ class PlaceDetailsViewController: UIViewController {
             avatar.contentMode = .scaleAspectFit
             downloadImage(url: checkedURL as URL)
         }
-        placeName.text = ConnectionManager.Places.selectedPlace?.name
-
+        let place = ConnectionManager.Places.selectedPlace?.name
+        let latitude = (ConnectionManager.Places.selectedPlace?.latitude)!
+        let longitude = (ConnectionManager.Places.selectedPlace?.longitude)!
+        placeName.text = place
+        latitudeLabel.text = String(latitude)
+        longitudeLabel.text = String(longitude)
     }
     func urlString() -> String {
         let outText =  ConnectionManager.Places.selectedPlace?.avatar
         return outText!
-        
     }
     
     func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {

@@ -56,15 +56,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
         let placeName = mapView.selectedMarker?.title
-        useSelectedPlace(name: placeName!)
+        let latitude = mapView.selectedMarker?.position.latitude
+        let longitude = mapView.selectedMarker?.position.longitude
+        useSelectedPlace(name: placeName!, lat: latitude!, lng: longitude!)
         performSegue(withIdentifier: "fromMapToDetailsSegue", sender: self)
     }
     
-    func useSelectedPlace(name: String) {
+    func useSelectedPlace(name: String, lat: Double, lng: Double) {
         for place in ConnectionManager.Places.placesArray {
-            if place.name == name {
-                ConnectionManager.Places.selectedPlace = place
+            guard place.name == name else {
+                continue
             }
+            guard place.latitude == lat else {
+                continue
+            }
+            guard place.longitude == lng else {
+                continue
+            }
+            ConnectionManager.Places.selectedPlace = place
         }
     }
 }
