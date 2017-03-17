@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		AF74CDAD76B3711B660DF36C /* Pods_MapViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDFF40373D8FC2F892911ACF /* Pods_MapViewer.framework */; };
+		E0239A9F1E7C199600072260 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0239A9E1E7C199600072260 /* TableViewController.swift */; };
+		E0239AA11E7C1A5A00072260 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0239AA01E7C1A5A00072260 /* CustomTableViewCell.swift */; };
+		E0239AB31E7C330600072260 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0239AB11E7C330600072260 /* Model.xcdatamodeld */; };
 		E078C2421E7B0C380016926D /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078C2411E7B0C380016926D /* ConnectionManager.swift */; };
 		E078C2471E7B3A800016926D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E078C2461E7B3A800016926D /* CoreData.framework */; };
 		E078C26F1E7B4AE00016926D /* PlaceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E078C26E1E7B4AE00016926D /* PlaceDetailsViewController.swift */; };
@@ -18,12 +21,14 @@
 		E09134471E79494500D3BBFD /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = E09134461E79494500D3BBFD /* Podfile */; };
 		E091344B1E79602A00D3BBFD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E091344A1E79602A00D3BBFD /* CoreLocation.framework */; };
 		E091344D1E79658200D3BBFD /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E091344C1E79658200D3BBFD /* MapViewController.swift */; };
-		E091344F1E7A95BC00D3BBFD /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = E091344E1E7A95BC00D3BBFD /* Place.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		368D702065FD1BF272BC6BD0 /* Pods-MapViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapViewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-MapViewer/Pods-MapViewer.release.xcconfig"; sourceTree = "<group>"; };
 		BDFF40373D8FC2F892911ACF /* Pods_MapViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MapViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0239A9E1E7C199600072260 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		E0239AA01E7C1A5A00072260 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		E0239AB21E7C330600072260 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		E078C2411E7B0C380016926D /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		E078C2461E7B3A800016926D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E078C26E1E7B4AE00016926D /* PlaceDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceDetailsViewController.swift; sourceTree = "<group>"; };
@@ -36,7 +41,6 @@
 		E09134461E79494500D3BBFD /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E091344A1E79602A00D3BBFD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E091344C1E79658200D3BBFD /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		E091344E1E7A95BC00D3BBFD /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		F4F0BC6194AB091076677077 /* Pods-MapViewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MapViewer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MapViewer/Pods-MapViewer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				E078C2411E7B0C380016926D /* ConnectionManager.swift */,
+				E0239AA01E7C1A5A00072260 /* CustomTableViewCell.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -76,6 +81,7 @@
 			children = (
 				E078C26E1E7B4AE00016926D /* PlaceDetailsViewController.swift */,
 				E091344C1E79658200D3BBFD /* MapViewController.swift */,
+				E0239A9E1E7C199600072260 /* TableViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -83,7 +89,6 @@
 		E078C2451E7B32330016926D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E091344E1E7A95BC00D3BBFD /* Place.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 				E09134391E7945F400D3BBFD /* Assets.xcassets */,
 				E091343B1E7945F400D3BBFD /* LaunchScreen.storyboard */,
 				E091343E1E7945F400D3BBFD /* Info.plist */,
+				E0239AB11E7C330600072260 /* Model.xcdatamodeld */,
 			);
 			path = MapViewer;
 			sourceTree = "<group>";
@@ -257,8 +263,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E091344F1E7A95BC00D3BBFD /* Place.swift in Sources */,
+				E0239A9F1E7C199600072260 /* TableViewController.swift in Sources */,
 				E078C26F1E7B4AE00016926D /* PlaceDetailsViewController.swift in Sources */,
+				E0239AA11E7C1A5A00072260 /* CustomTableViewCell.swift in Sources */,
+				E0239AB31E7C330600072260 /* Model.xcdatamodeld in Sources */,
 				E078C2421E7B0C380016926D /* ConnectionManager.swift in Sources */,
 				E09134311E7945F400D3BBFD /* AppDelegate.swift in Sources */,
 				E091344D1E79658200D3BBFD /* MapViewController.swift in Sources */,
@@ -432,6 +440,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E0239AB11E7C330600072260 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E0239AB21E7C330600072260 /* Model.xcdatamodel */,
+			);
+			currentVersion = E0239AB21E7C330600072260 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E09134251E7945F400D3BBFD /* Project object */;
 }

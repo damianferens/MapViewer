@@ -9,6 +9,8 @@
 import UIKit
 
 class PlaceDetailsViewController: UIViewController {
+    var selectedPlace: Place? = nil
+    
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var placeName: UILabel!
     
@@ -20,20 +22,20 @@ class PlaceDetailsViewController: UIViewController {
     }
     
     func loadContent() {
-        if let checkedURL = NSURL(string: urlString()) {
+        guard let placeToShow = selectedPlace else {
+            return
+        }
+        
+        if let checkedURL = NSURL(string: placeToShow.avatar) {
             avatar.contentMode = .scaleAspectFit
             downloadImage(url: checkedURL as URL)
         }
-        let place = ConnectionManager.Places.selectedPlace?.name
-        let latitude = (ConnectionManager.Places.selectedPlace?.latitude)!
-        let longitude = (ConnectionManager.Places.selectedPlace?.longitude)!
-        placeName.text = place
+        
+        let latitude = placeToShow.latitude
+        let longitude = placeToShow.longitude
+        placeName.text = placeToShow.name
         latitudeLabel.text = String(latitude)
         longitudeLabel.text = String(longitude)
-    }
-    func urlString() -> String {
-        let outText =  ConnectionManager.Places.selectedPlace?.avatar
-        return outText!
     }
     
     func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
@@ -42,6 +44,7 @@ class PlaceDetailsViewController: UIViewController {
             completion(data, response, error)
             }.resume()
     }
+    
     func downloadImage(url: URL) {
         getDataFromUrl(url: url) { (data, response, error)  in
             DispatchQueue.main.sync() { () -> Void in

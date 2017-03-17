@@ -13,6 +13,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     lazy var locationManager = CLLocationManager()
     @IBOutlet weak var mapView: GMSMapView!
     let connectionManager = ConnectionManager()
+    var selectedPlace: Place? = nil
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation = locations.last
@@ -44,6 +45,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 marker.position = coordinates
                 marker.title = place.name
                 marker.map = self!.mapView
+                marker.userData = place
                 path.add(coordinates)
             }
             self!.animateToBounds(bounds: GMSCoordinateBounds(path: path))
@@ -55,25 +57,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-        let placeName = mapView.selectedMarker?.title
-        let latitude = mapView.selectedMarker?.position.latitude
-        let longitude = mapView.selectedMarker?.position.longitude
-        useSelectedPlace(name: placeName!, lat: latitude!, lng: longitude!)
+        selectedPlace = marker.userData as! Place
         performSegue(withIdentifier: "fromMapToDetailsSegue", sender: self)
     }
     
-    func useSelectedPlace(name: String, lat: Double, lng: Double) {
-        for place in ConnectionManager.Places.placesArray {
-            guard place.name == name else {
-                continue
-            }
-            guard place.latitude == lat else {
-                continue
-            }
-            guard place.longitude == lng else {
-                continue
-            }
-            ConnectionManager.Places.selectedPlace = place
-        }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationViewController: PlaceDetailsViewController = segue.destination as! PlaceDetailsViewController
+        destinationViewController.selectedPlace = selectedPlace
     }
 }

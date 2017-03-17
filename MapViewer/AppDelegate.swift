@@ -38,56 +38,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
-
-    func applicationWillTerminate(application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
+    
+    // #pragma mark - Core Data stack
+    
+    var mainManagedObjectContext: NSManagedObjectContext {
+        if !(_managedObjectContext != nil) {
+            let coordinator = self.persistentStoreCoordinator
+                _managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.mainQueueConcurrencyType)
+                _managedObjectContext!.persistentStoreCoordinator = coordinator
+        }
+        return _managedObjectContext!
     }
     
-    // MARK: - Core Data stack
+    var _managedObjectContext: NSManagedObjectContext? = nil
     
-    lazy var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-         */
-        let container = NSPersistentContainer(name: "CoreData")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
+    var managedObjectModel: NSManagedObjectModel {
+        if !(_managedObjectModel != nil) {
+            let modelURL = Bundle.main.url(forResource: "Model", withExtension: "momd")
+            _managedObjectModel = NSManagedObjectModel(contentsOf: modelURL!)
+        }
+        return _managedObjectModel!
+    }
     
-    // MARK: - Core Data Saving support
+    var _managedObjectModel: NSManagedObjectModel? = nil
     
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
+    var persistentStoreCoordinator: NSPersistentStoreCoordinator {
+        if !(_persistentStoreCoordinator != nil) {
+            let storeURL = self.applicationDocumentsDirectory.appendingPathComponent("MapViewer.sqlite")
+            _persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
             do {
-                try context.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                try _persistentStoreCoordinator!.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
+            }
+            catch {
+            
             }
         }
+        return _persistentStoreCoordinator!
+    }
+    
+    var _persistentStoreCoordinator: NSPersistentStoreCoordinator? = nil
+    
+    var applicationDocumentsDirectory: NSURL {
+        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return urls[urls.endIndex-1] as NSURL
     }
     
 }

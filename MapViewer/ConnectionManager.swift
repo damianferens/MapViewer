@@ -10,12 +10,20 @@ import UIKit
 import CoreLocation
 import Alamofire
 
-class ConnectionManager: NSObject {
+struct Place {
+    let id: String, avatar: String, name: String
+    let latitude: Double, longitude: Double
     
-    struct Places {
-        static var placesArray: [Place] = []
-        static var selectedPlace: Place? = nil
+    init(avatar: String, id: String, latitude: Double, longitude: Double, name: String) {
+        self.avatar = avatar
+        self.id = id
+        self.latitude = latitude
+        self.longitude = longitude
+        self.name = name
     }
+}
+
+class ConnectionManager: NSObject {
     
     var urlComponents = URLComponents()
     override init() {
@@ -42,16 +50,16 @@ class ConnectionManager: NSObject {
             
             Alamofire.request(url).responseJSON { [weak self] response in
                 if let places = response.result.value as? [Dictionary<AnyHashable, Any>] {
-                    
+                    var placesArray: [Place] = []
                     for placeDictionary in places {
                         let place = Place(avatar: placeDictionary[self!.avatarJSONKey] as! String,
                                           id: placeDictionary[self!.idJSONKey] as! String,
                                           latitude: placeDictionary[self!.latitudeJSONKey] as! Double,
                                           longitude: placeDictionary[self!.longitudeJSONKey] as! Double,
                                           name: placeDictionary[self!.nameJSONKey] as! String)
-                        Places.placesArray.append(place)
+                        placesArray.append(place)
                     }
-                    completionHandler(Places.placesArray)
+                    completionHandler(placesArray)
                 }
             }
         }
