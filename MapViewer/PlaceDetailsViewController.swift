@@ -9,7 +9,7 @@
 import UIKit
 
 class PlaceDetailsViewController: UIViewController {
-    var selectedPlace: Place? = nil
+    var selectedPlace: Place?
     
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var placeName: UILabel!
@@ -45,10 +45,38 @@ class PlaceDetailsViewController: UIViewController {
             }.resume()
     }
     
-    func downloadImage(url: URL) {
+    private func saveSelectedPlace(imageUrl: URL) {
+        let databaseManager = DatabaseManager()
+        selectedPlace?.avatar = imageUrl.absoluteString
+        databaseManager.saveSelectedPlace(place: selectedPlace!)
+    }
+    
+    private func downloadImage(url: URL) {
         getDataFromUrl(url: url) { (data, response, error)  in
+            guard let data = data, error == nil else { return }
+            let documentsDirectoryURL = try! FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            
+            // create a name for your image
+            guard let placeToShow = self.selectedPlace else {
+                return
+            }
+            let fileName = placeToShow.name
+            let fileURL = documentsDirectoryURL.appendingPathComponent("\(fileName).png")
+            
+            
+            if !FileManager.default.fileExists(atPath: fileURL.path) {
+                do {
+                    try UIImagePNGRepresentation(UIImage(data: data)!)!.write(to: fileURL)
+                    print("Image Added Successfully")
+                } catch {
+                    print(error)
+                }
+            } else {
+                print("Image Not Added")
+            }
+            
+            self.saveSelectedPlace(imageUrl: fileURL)
             DispatchQueue.main.sync() { () -> Void in
-                guard let data = data, error == nil else { return }
                 self.avatar.image = UIImage(data: data)
             }
         }

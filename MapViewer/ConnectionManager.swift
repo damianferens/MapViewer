@@ -11,8 +11,8 @@ import CoreLocation
 import Alamofire
 
 struct Place {
-    let id: String, avatar: String, name: String
-    let latitude: Double, longitude: Double
+    var id: String, avatar: String, name: String
+    var latitude: Double, longitude: Double
     
     init(avatar: String, id: String, latitude: Double, longitude: Double, name: String) {
         self.avatar = avatar

@@ -8,7 +8,6 @@
 
 import UIKit
 import GoogleMaps
-import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         GMSServices.provideAPIKey("AIzaSyA9lxg88Ib46SBS9XnPdPXZdgZlXJ1y8qo")
         // Override point for customization after application launch.
+        if let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.path {
+            print("Documents Directory: " + documentsPath)
+        }
         return true
     }
 
@@ -38,50 +40,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
-    
-    // #pragma mark - Core Data stack
-    
-    var mainManagedObjectContext: NSManagedObjectContext {
-        if !(_managedObjectContext != nil) {
-            let coordinator = self.persistentStoreCoordinator
-                _managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.mainQueueConcurrencyType)
-                _managedObjectContext!.persistentStoreCoordinator = coordinator
-        }
-        return _managedObjectContext!
-    }
-    
-    var _managedObjectContext: NSManagedObjectContext? = nil
-    
-    var managedObjectModel: NSManagedObjectModel {
-        if !(_managedObjectModel != nil) {
-            let modelURL = Bundle.main.url(forResource: "Model", withExtension: "momd")
-            _managedObjectModel = NSManagedObjectModel(contentsOf: modelURL!)
-        }
-        return _managedObjectModel!
-    }
-    
-    var _managedObjectModel: NSManagedObjectModel? = nil
-    
-    var persistentStoreCoordinator: NSPersistentStoreCoordinator {
-        if !(_persistentStoreCoordinator != nil) {
-            let storeURL = self.applicationDocumentsDirectory.appendingPathComponent("MapViewer.sqlite")
-            _persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-            do {
-                try _persistentStoreCoordinator!.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
-            }
-            catch {
-            
-            }
-        }
-        return _persistentStoreCoordinator!
-    }
-    
-    var _persistentStoreCoordinator: NSPersistentStoreCoordinator? = nil
-    
-    var applicationDocumentsDirectory: NSURL {
-        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        return urls[urls.endIndex-1] as NSURL
-    }
-    
 }
 

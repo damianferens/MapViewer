@@ -57,7 +57,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-        selectedPlace = marker.userData as! Place
+        selectedPlace = marker.userData as? Place
         performSegue(withIdentifier: "fromMapToDetailsSegue", sender: self)
     }
     
