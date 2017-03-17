@@ -29,7 +29,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VZy-nu-BPX" id="YPp-LG-fZG">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -46,7 +46,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Ostatnio oglądane" id="8AP-tZ-b2i"/>
                     <connections>
-                        <segue destination="IeQ-LF-jrr" kind="show" id="R2E-i1-dtv"/>
+                        <segue destination="IeQ-LF-jrr" kind="show" identifier="fromLastToDetailsSegue" id="R2E-i1-dtv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZUA-1N-qqx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -65,8 +65,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qRU-Ib-Erc" customClass="GMSMapView">
-                                <rect key="frame" x="37" y="197" width="240" height="128"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qRU-Ib-Erc" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -81,7 +81,7 @@
                     <navigationItem key="navigationItem" title="Mapa" id="Lpf-GS-g37"/>
                     <connections>
                         <outlet property="mapView" destination="qRU-Ib-Erc" id="ziZ-Oi-lCZ"/>
-                        <segue destination="IeQ-LF-jrr" kind="show" identifier="placeInfo" id="qmg-2U-OkX"/>
+                        <segue destination="IeQ-LF-jrr" kind="show" identifier="fromMapToDetailsSegue" id="qmg-2U-OkX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4D8-xe-Mzn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -91,7 +91,7 @@
         <!--Place Details View Controller-->
         <scene sceneID="X5L-hg-H1n">
             <objects>
-                <viewController storyboardIdentifier="placeDetailsVC" id="IeQ-LF-jrr" customClass="PlaceDetailsViewController" customModule="MapViewer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="IeQ-LF-jrr" customClass="PlaceDetailsViewController" customModule="MapViewer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hIm-er-NvK"/>
                         <viewControllerLayoutGuide type="bottom" id="OPb-rM-eZm"/>
@@ -107,34 +107,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Długość geograficzna" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYB-1b-BcJ">
-                                <rect key="frame" x="71" y="394" width="168" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLv-vS-kLy">
-                                <rect key="frame" x="247" y="434" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Szerokość geograficzna" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZy-qX-J93">
-                                <rect key="frame" x="71" y="476" width="184" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFF-A6-nxl">
-                                <rect key="frame" x="247" y="531" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Dq-j9-Spv">
                                 <rect key="frame" x="57" y="117" width="260" height="182"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -142,6 +114,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="avatar" destination="2Dq-j9-Spv" id="Uzg-XW-ElP"/>
+                        <outlet property="placeName" destination="t6Q-Wf-48W" id="IWc-QV-XNM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o0M-NN-7YQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -206,6 +182,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="qmg-2U-OkX"/>
+        <segue reference="R2E-i1-dtv"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -55,7 +55,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
     
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "placeDetailsVC") as! PlaceDetailsViewController
-        self.present(vc, animated: true, completion: nil)
+        let placeName = mapView.selectedMarker?.title
+        useSelectedPlace(name: placeName!)
+        performSegue(withIdentifier: "fromMapToDetailsSegue", sender: self)
+    }
+    
+    func useSelectedPlace(name: String) {
+        for place in ConnectionManager.Places.placesArray {
+            if place.name == name {
+                ConnectionManager.Places.selectedPlace = place
+            }
+        }
     }
 }

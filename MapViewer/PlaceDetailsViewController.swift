@@ -9,27 +9,40 @@
 import UIKit
 
 class PlaceDetailsViewController: UIViewController {
-
+    @IBOutlet weak var avatar: UIImageView!
+    @IBOutlet weak var placeName: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        loadContent()
     }
     
+    func loadContent() {
+        if let checkedURL = NSURL(string: urlString()) {
+            avatar.contentMode = .scaleAspectFit
+            downloadImage(url: checkedURL as URL)
+        }
+        placeName.text = ConnectionManager.Places.selectedPlace?.name
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
-    */
-
+    func urlString() -> String {
+        let outText =  ConnectionManager.Places.selectedPlace?.avatar
+        return outText!
+        
+    }
+    
+    func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+        URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            completion(data, response, error)
+            }.resume()
+    }
+    func downloadImage(url: URL) {
+        getDataFromUrl(url: url) { (data, response, error)  in
+            DispatchQueue.main.sync() { () -> Void in
+                guard let data = data, error == nil else { return }
+                self.avatar.image = UIImage(data: data)
+            }
+        }
+    }
 }

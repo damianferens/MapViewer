@@ -11,6 +11,12 @@ import CoreLocation
 import Alamofire
 
 class ConnectionManager: NSObject {
+    
+    struct Places {
+        static var placesArray: [Place] = []
+        static var selectedPlace: Place? = nil
+    }
+    
     var urlComponents = URLComponents()
     override init() {
         urlComponents.scheme = "https";
@@ -36,16 +42,16 @@ class ConnectionManager: NSObject {
             
             Alamofire.request(url).responseJSON { [weak self] response in
                 if let places = response.result.value as? [Dictionary<AnyHashable, Any>] {
-                    var placesArray :[Place] = []
+                    
                     for placeDictionary in places {
                         let place = Place(avatar: placeDictionary[self!.avatarJSONKey] as! String,
                                           id: placeDictionary[self!.idJSONKey] as! String,
                                           latitude: placeDictionary[self!.latitudeJSONKey] as! Double,
                                           longitude: placeDictionary[self!.longitudeJSONKey] as! Double,
                                           name: placeDictionary[self!.nameJSONKey] as! String)
-                        placesArray.append(place)
+                        Places.placesArray.append(place)
                     }
-                    completionHandler(placesArray)
+                    completionHandler(Places.placesArray)
                 }
             }
         }
