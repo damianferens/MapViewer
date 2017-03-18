@@ -38,17 +38,17 @@ class PlaceDetailsViewController: UIViewController {
         longitudeLabel.text = String(longitude)
     }
     
+    private func saveSelectedPlace(imageUrl: URL) {
+        let databaseManager = DatabaseManager()
+        selectedPlace?.avatar = imageUrl.absoluteString
+        databaseManager.saveSelectedPlace(place: selectedPlace!)
+    }
+    
     func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
         URLSession.shared.dataTask(with: url) {
             (data, response, error) in
             completion(data, response, error)
             }.resume()
-    }
-    
-    private func saveSelectedPlace(imageUrl: URL) {
-        let databaseManager = DatabaseManager()
-        selectedPlace?.avatar = imageUrl.absoluteString
-        databaseManager.saveSelectedPlace(place: selectedPlace!)
     }
     
     private func downloadImage(url: URL) {

@@ -12,7 +12,7 @@ import CoreData
 class DatabaseManager: NSObject {
     var mainManagedObjectContext: NSManagedObjectContext
     var backgroundManagedObjectContext: NSManagedObjectContext
-
+    
     override init() {
         // This resource is the same name as your xcdatamodeld contained in your project.
         guard let modelURL = Bundle.main.url(forResource: "Model", withExtension:"momd") else {
@@ -65,14 +65,19 @@ class DatabaseManager: NSObject {
         }
     }
     
-    func allSelectedPlaces() -> [SelectedPlace] {
-        let placesFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "SelectedPlace")
-        do {
-            let fetchedPlace = try backgroundManagedObjectContext.fetch(placesFetch) as! [SelectedPlace]
-        } catch {
-            fatalError()
+    func allSelectedPlaces(completion: @escaping () -> ()){
+        var placeArray: [SelectedPlace] = []
+        mainManagedObjectContext.perform {
+            let fetchRequest: NSFetchRequest<SelectedPlace> = SelectedPlace.fetchRequest()
+            do {
+                let fetchResult = try self.mainManagedObjectContext.fetch(fetchRequest)
+                placeArray = fetchResult
+                LastCheckedTableViewController.places = placeArray
+                completion()
+            } catch {
+                print("Could not load data from database")
+            }
         }
-        return []
     }
     
 }

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.path {
             print("Documents Directory: " + documentsPath)
         }
-        return true
+               return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
