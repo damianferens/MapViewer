@@ -10,6 +10,7 @@ import UIKit
 
 class PlaceDetailsViewController: UIViewController {
     var selectedPlace: Place?
+    static var isUsingCoreData: Bool?
     
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var placeName: UILabel!
@@ -18,7 +19,11 @@ class PlaceDetailsViewController: UIViewController {
     @IBOutlet weak var latitudeLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadContent()
+        if (PlaceDetailsViewController.isUsingCoreData == true) {
+            loadCoreDataContent()
+        } else {
+            loadContent()
+        }
     }
     
     func loadContent() {
@@ -55,8 +60,6 @@ class PlaceDetailsViewController: UIViewController {
         getDataFromUrl(url: url) { (data, response, error)  in
             guard let data = data, error == nil else { return }
             let documentsDirectoryURL = try! FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            
-            // create a name for your image
             guard let placeToShow = self.selectedPlace else {
                 return
             }
@@ -80,5 +83,24 @@ class PlaceDetailsViewController: UIViewController {
                 self.avatar.image = UIImage(data: data)
             }
         }
+    }
+    func loadCoreDataContent() {
+        guard let placeToShow = selectedPlace else {
+            return
+        }
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+        let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        if let dirPath = paths.first
+        {
+            let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent("\(placeToShow.name).png")
+            let image = UIImage(contentsOfFile: imageURL.path)
+            self.avatar.image = image
+        }
+        let latitude = placeToShow.latitude
+        let longitude = placeToShow.longitude
+        placeName.text = placeToShow.name
+        latitudeLabel.text = String(latitude)
+        longitudeLabel.text = String(longitude)
     }
 }

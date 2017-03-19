@@ -15,16 +15,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     let connectionManager = ConnectionManager()
     var selectedPlace: Place? = nil
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userLocation = locations.last
-        let camera = GMSCameraPosition.camera(withLatitude: userLocation!.coordinate.latitude,
-                                              longitude: userLocation!.coordinate.longitude, zoom: 13.0)
-        showPlacesForCoordinates(coordinates: CLLocationCoordinate2D(latitude: userLocation!.coordinate.latitude, longitude: userLocation!.coordinate.longitude))
-        
-        mapView.camera = camera
-        locationManager.stopUpdatingLocation()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
@@ -33,6 +23,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
         mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
     }
     
     private func showPlacesForCoordinates(coordinates: CLLocationCoordinate2D) {
@@ -52,6 +43,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         }
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation = locations.last
+        let camera = GMSCameraPosition.camera(withLatitude: userLocation!.coordinate.latitude,
+                                              longitude: userLocation!.coordinate.longitude, zoom: 13.0)
+        showPlacesForCoordinates(coordinates: CLLocationCoordinate2D(latitude: userLocation!.coordinate.latitude, longitude: userLocation!.coordinate.longitude))
+        
+        mapView.camera = camera
+        locationManager.stopUpdatingLocation()
+    }
+    
     private func animateToBounds(bounds :GMSCoordinateBounds) {
         self.mapView!.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 50.0))
     }
@@ -62,6 +63,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        PlaceDetailsViewController.isUsingCoreData = false
         let destinationViewController: PlaceDetailsViewController = segue.destination as! PlaceDetailsViewController
         destinationViewController.selectedPlace = selectedPlace
     }

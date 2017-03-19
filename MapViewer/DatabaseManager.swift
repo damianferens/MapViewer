@@ -6,7 +6,6 @@
 //  Copyright © 2017 Damian Ferens. All rights reserved.
 //
 
-import UIKit
 import CoreData
 
 class DatabaseManager: NSObject {
@@ -65,15 +64,12 @@ class DatabaseManager: NSObject {
         }
     }
     
-    func allSelectedPlaces(completion: @escaping () -> ()){
-        var placeArray: [SelectedPlace] = []
+    func allSelectedPlaces(completionHandler: @escaping ([SelectedPlace]) -> ()){
         mainManagedObjectContext.perform {
             let fetchRequest: NSFetchRequest<SelectedPlace> = SelectedPlace.fetchRequest()
             do {
                 let fetchResult = try self.mainManagedObjectContext.fetch(fetchRequest)
-                placeArray = fetchResult
-                LastCheckedTableViewController.places = placeArray
-                completion()
+                completionHandler(fetchResult)
             } catch {
                 print("Could not load data from database")
             }
@@ -81,84 +77,3 @@ class DatabaseManager: NSObject {
     }
     
 }
-//    //MARK: core data stack
-//    var mainManagedObjectContext: NSManagedObjectContext {
-//        if !(_managedObjectContext != nil) {
-//            let coordinator = self.persistentStoreCoordinator
-//            _managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.mainQueueConcurrencyType)
-//            _managedObjectContext!.persistentStoreCoordinator = coordinator
-//        }
-//        return _managedObjectContext!
-//    }
-//
-//    var backgroundManagedObjectContext: NSManagedObjectContext {
-//        if !(_managedObjectContext != nil) {
-//            let coordinator = self.persistentStoreCoordinator
-//            _managedObjectContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
-//            _managedObjectContext!.persistentStoreCoordinator = coordinator
-//        }
-//        return _managedObjectContext!
-//    }
-//
-//    var _managedObjectContext: NSManagedObjectContext? = nil
-//
-//    var managedObjectModel: NSManagedObjectModel {
-//        if !(_managedObjectModel != nil) {
-//            let modelURL = Bundle.main.url(forResource: "Model", withExtension: "xcdatamodeld")
-//            _managedObjectModel = NSManagedObjectModel(contentsOf: modelURL!)
-//        }
-//        return _managedObjectModel!
-//    }
-//
-//    var _managedObjectModel: NSManagedObjectModel? = nil
-//
-//    var persistentStoreCoordinator: NSPersistentStoreCoordinator {
-//        if !(_persistentStoreCoordinator != nil) {
-//            let storeURL = self.applicationDocumentsDirectory.appendingPathComponent("MapViewer.sqlite")
-//            _persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-//            do {
-//                try _persistentStoreCoordinator!.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
-//            }
-//            catch {
-//
-//            }
-//        }
-//        return _persistentStoreCoordinator!
-//    }
-//
-//    var _persistentStoreCoordinator: NSPersistentStoreCoordinator? = nil
-//
-//    var applicationDocumentsDirectory: NSURL {
-//        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-//        return urls[urls.endIndex-1] as NSURL
-//    }
-//
-//    //MARK: public methods
-//    func saveSelectedPlace(place: Place) {
-//
-//        // logit to check if place already in database
-//        //
-//        backgroundManagedObjectContext.perform {
-//            let entity = NSEntityDescription.entity(forEntityName: "SelectedPlace",
-//                                                    in: self.backgroundManagedObjectContext)!
-//
-//            let placeToSave = NSManagedObject(entity: entity,
-//                                         insertInto: self.backgroundManagedObjectContext)
-//            placeToSave.setValue(place.avatar, forKey: "avatar")
-//            placeToSave.setValue(place.name, forKey: "name")
-//            placeToSave.setValue(place.id, forKey: "id")
-//            placeToSave.setValue(place.latitude, forKey: "lat")
-//            placeToSave.setValue(place.longitude, forKey: "lng")
-//
-//            do {
-//                try self.backgroundManagedObjectContext.save()
-//            } catch let error as NSError {
-//                print("Could not save. \(error), \(error.userInfo)")
-//            }
-//        }
-//    }
-//
-//    func allSelectedPlaces() -> [SelectedPlace] {
-//        return []
-//    }
-//}

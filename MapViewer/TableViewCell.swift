@@ -10,8 +10,8 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
     @IBOutlet weak var placeNameLabel: UILabel!
-    @IBOutlet weak var placeLongitudeLabel: UILabel!
-    @IBOutlet weak var placeLatitudeLabel: UILabel!
+
+    @IBOutlet weak var geographicalCoordinatesLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

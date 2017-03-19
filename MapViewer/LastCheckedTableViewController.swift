@@ -9,16 +9,21 @@
 import UIKit
 
 class LastCheckedTableViewController: UITableViewController {
-    static var places: [SelectedPlace] = []
+    var places: [SelectedPlace] = []
+    var index: Int = 0
+    var selectedPlace: Place?
+    let dataModel = DatabaseManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        dataModel.allSelectedPlaces { [weak self] (data: [SelectedPlace]) in
+            self?.places = data
+            self?.tableView.reloadData()
+        }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        print(LastCheckedTableViewController.places.count)
-        readSelectedPlaces()
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -31,78 +36,43 @@ class LastCheckedTableViewController: UITableViewController {
         return 1
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return LastCheckedTableViewController.places.count
+        return places.count
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        index = (self.tableView.indexPathForSelectedRow?.row)!
+        test()
+        PlaceDetailsViewController.isUsingCoreData = true
+        
         performSegue(withIdentifier: "fromLastToDetailsSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationViewController: PlaceDetailsViewController = segue.destination as! PlaceDetailsViewController
+        destinationViewController.selectedPlace = selectedPlace
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
-        let place = LastCheckedTableViewController.places[indexPath.row]
-        cell.placeNameLabel?.text = place.name
-        cell.placeLatitudeLabel.text = String(place.lat)
-        cell.placeLongitudeLabel.text = String(place.lng)
+        let name = places[indexPath.row].name
+        let gC = "Lng: \(String(places[indexPath.row].lng)), Lat: \(String(places[indexPath.row].lat))"
+        cell.placeNameLabel?.text = name
+        cell.geographicalCoordinatesLabel.text = gC
         return cell
     }
     
-    func readSelectedPlaces() {
-        let a = DatabaseManager()
-        a.allSelectedPlaces {
-            print("Pobieranie zakończone")
-            for i in LastCheckedTableViewController.places {
-                print(i.name!)
-            }
-            self.tableView.reloadData()
-        }
+    func test() {
+        let name = self.places[self.index].name!
+        let latitude = self.places[self.index].lat
+        let longitude = self.places[self.index].lng
+        let avatar = self.places[self.index].avatar!
+        let id = self.places[self.index].identifier!
+        self.selectedPlace = Place(avatar: avatar, id: id, latitude: latitude, longitude: longitude, name: name)
     }
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
