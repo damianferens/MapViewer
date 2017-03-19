@@ -72,6 +72,7 @@
 		E0239AB41E7C377500072260 /* Custom views */ = {
 			isa = PBXGroup;
 			children = (
+				E0239ABB1E7C9F4D00072260 /* TableViewCell.swift */,
 			);
 			name = "Custom views";
 			sourceTree = "<group>";
@@ -91,7 +92,6 @@
 				E078C26E1E7B4AE00016926D /* PlaceDetailsViewController.swift */,
 				E091344C1E79658200D3BBFD /* MapViewController.swift */,
 				E0239AB91E7C9D8D00072260 /* LastCheckedTableViewController.swift */,
-				E0239ABB1E7C9F4D00072260 /* TableViewCell.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";

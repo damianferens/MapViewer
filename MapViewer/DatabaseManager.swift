@@ -11,7 +11,7 @@ import CoreData
 class DatabaseManager: NSObject {
     var mainManagedObjectContext: NSManagedObjectContext
     var backgroundManagedObjectContext: NSManagedObjectContext
-    
+
     override init() {
         // This resource is the same name as your xcdatamodeld contained in your project.
         guard let modelURL = Bundle.main.url(forResource: "Model", withExtension:"momd") else {
@@ -40,10 +40,8 @@ class DatabaseManager: NSObject {
             }
         }
     }
+    
     func saveSelectedPlace(place: Place) {
-        
-        // logit to check if place already in database
-        //
         backgroundManagedObjectContext.perform {
             let entity = NSEntityDescription.entity(forEntityName: "SelectedPlace",
                                                     in: self.backgroundManagedObjectContext)!
@@ -63,7 +61,7 @@ class DatabaseManager: NSObject {
             }
         }
     }
-    
+
     func allSelectedPlaces(completionHandler: @escaping ([SelectedPlace]) -> ()){
         mainManagedObjectContext.perform {
             let fetchRequest: NSFetchRequest<SelectedPlace> = SelectedPlace.fetchRequest()

@@ -24,11 +24,6 @@ class LastCheckedTableViewController: UITableViewController {
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -47,9 +42,8 @@ class LastCheckedTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         index = (self.tableView.indexPathForSelectedRow?.row)!
-        test()
+        useSelectedPlace()
         PlaceDetailsViewController.isUsingCoreData = true
-        
         performSegue(withIdentifier: "fromLastToDetailsSegue", sender: self)
     }
     
@@ -61,13 +55,13 @@ class LastCheckedTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         let name = places[indexPath.row].name
-        let gC = "Lng: \(String(places[indexPath.row].lng)), Lat: \(String(places[indexPath.row].lat))"
+        let geoCoordinates = "Lng: \(String(places[indexPath.row].lng)), Lat: \(String(places[indexPath.row].lat))"
         cell.placeNameLabel?.text = name
-        cell.geographicalCoordinatesLabel.text = gC
+        cell.geographicalCoordinatesLabel.text = geoCoordinates
         return cell
     }
     
-    func test() {
+    func useSelectedPlace() {
         let name = self.places[self.index].name!
         let latitude = self.places[self.index].lat
         let longitude = self.places[self.index].lng

@@ -11,12 +11,11 @@ import UIKit
 class PlaceDetailsViewController: UIViewController {
     var selectedPlace: Place?
     static var isUsingCoreData: Bool?
-    
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var placeName: UILabel!
-    
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBOutlet weak var latitudeLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if (PlaceDetailsViewController.isUsingCoreData == true) {
@@ -66,11 +65,11 @@ class PlaceDetailsViewController: UIViewController {
             let fileName = placeToShow.name
             let fileURL = documentsDirectoryURL.appendingPathComponent("\(fileName).png")
             
-            
             if !FileManager.default.fileExists(atPath: fileURL.path) {
                 do {
                     try UIImagePNGRepresentation(UIImage(data: data)!)!.write(to: fileURL)
                     print("Image Added Successfully")
+                    self.saveSelectedPlace(imageUrl: fileURL)
                 } catch {
                     print(error)
                 }
@@ -78,12 +77,12 @@ class PlaceDetailsViewController: UIViewController {
                 print("Image Not Added")
             }
             
-            self.saveSelectedPlace(imageUrl: fileURL)
             DispatchQueue.main.sync() { () -> Void in
                 self.avatar.image = UIImage(data: data)
             }
         }
     }
+    
     func loadCoreDataContent() {
         guard let placeToShow = selectedPlace else {
             return
@@ -91,8 +90,7 @@ class PlaceDetailsViewController: UIViewController {
         let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
         let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
         let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-        if let dirPath = paths.first
-        {
+        if let dirPath = paths.first {
             let imageURL = URL(fileURLWithPath: dirPath).appendingPathComponent("\(placeToShow.name).png")
             let image = UIImage(contentsOfFile: imageURL.path)
             self.avatar.image = image
